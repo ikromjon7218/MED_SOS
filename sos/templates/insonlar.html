@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <title>insonlar</title>
+
+    <script src="https://unpkg.com/htmx.org/dist/htmx.min.js"></script>
+</head>
+<body bgcolor="#008000">
+    <h1><p style="color:rgba(255, 1, 1, 0.993);">Yordam keraklar:</p></h1>
+    <!-- {% for i in insonlar %}
+  <h1>{{i.id}}. {{i.ism}}</h1>
+  <h2>Tugilgan yil: {{i.tugilgan_yil}}</h2>
+  <h2>Tel raqam: {{i.tel_raqam}}</h2>
+  <h2>Faol: {{i.faol}}</h2>
+  <h2>Geo: {{i.geolocation_url}}</h2> -->
+
+  <!-- {% endfor %} -->
+<!--  -->
+  <div id="sorovlar" hx-get="{% url 'hammasi' %}" hx-trigger="every 1s">
+    {% for sorov in insonlar %}
+        <div class="sorov-item">
+            <h2>{{forloop.counter}}. {{sorov.ism}}, {{sorov.tugilgan_yil}}-yilda tug'ilgan</h2>
+            <a href="/ochirish/{{sorov.id}}/"><button type="submit">Yordam yuborildi</button></a>
+            <h2>Geo: <a href="{{sorov.geolocation_url}}">{{sorov.geolocation_url}}</a></h2>
+            <h2>Telefon raqam: {{sorov.tel_raqam}}.    Vaqt: {{sorov.vaqt}}</h2>
+        </div>
+    {% endfor %}
+</div>
+
+</body>
+</html>

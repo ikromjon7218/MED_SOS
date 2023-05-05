@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>insonlar</title>
+    <script src="https://unpkg.com/htmx.org/dist/htmx.min.js"></script>
+    <style>
+        body {
+            background-color: #008000;
+            font-family: Arial, sans-serif;
+        }
+        h1, h2 {
+            color: rgba(255, 1, 1, 0.993);
+        }
+        button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+        a {
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="sorovlar" hx-get="{% url 'hammasi' %}" hx-trigger="every 1s">
+        {% for sorov in insonlar %}
+            <div class="sorov-item">
+                <h2>{{forloop.counter}}. {{sorov.ism}}, {{sorov.tugilgan_yil}}-yilda tug'ilgan</h2>
+                <a href="/ochirish/{{sorov.id}}/"><button type="submit">Yordam yuborildi</button></a>
+                <h2>Geo: <a href="{{sorov.geolocation_url}}">{{sorov.geolocation_url}}</a></h2>
+                <h2>Telefon raqam: {{sorov.tel_raqam}}. Vaqt: {{sorov.vaqt}}</h2>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
